@@ -3,7 +3,7 @@
     "wireit": "^0.14.4"
   },
   "main": "index.js",
-  "name": "@google-labs/breadboard-cli",
+  "name": "npm-pack-install-mre",
   "scripts": {
     "npm:pack:install": "npm install -g $(npm pack)",
     "npm:test:pack": "npm run npm:pack:install && (cd ~ && npx $PACKAGE_NAME --help)",
