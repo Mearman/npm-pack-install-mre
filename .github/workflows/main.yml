@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        node:
+          - 20
+        npm:
+          - 10.2.1
+          - 10.2.2
+          - 10.2.3
+          - 10.2.4
+          - 10.2.5
+          - 10.3.0
+          - 10.4.0
+          - 10.5.0
+        command:
+          - npm install -g $(npm pack)
+          - npm run pack:install
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@main
+        with:
+          node-version: ${{ matrix.node }}
+
+      - run: npm install -g npm@${{ matrix.npm }}
+      - run: exec ${{ matrix.command }}

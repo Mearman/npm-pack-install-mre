@@ -1,0 +1,8 @@
+{
+  "name": "npm-pack-install-mre",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "pack:install": "npm install -g $(npm pack)"
+  }
+}
