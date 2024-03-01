@@ -6,7 +6,7 @@
   "name": "@google-labs/breadboard-cli",
   "scripts": {
     "npm:pack:install": "npm install -g $(npm pack)",
-    "npm:test:pack": "npm run npm:pack:install && (cd ~ && npx @google-labs/breadboard-cli --help)",
+    "npm:test:pack": "npm run npm:pack:install && (PACKAGE_NAME=$(npm pkg get name) && (cd ~ && npx $PACKAGE_NAME --help))",
     "wireit:pack:install": "wireit",
     "wireit:test:pack": "wireit"
   },
@@ -16,7 +16,7 @@
       "command": "npm install -g $(npm pack)"
     },
     "wireit:test:pack": {
-      "command": "(cd ~ && npx @google-labs/breadboard-cli --help)",
+      "command": "PACKAGE_NAME=$(npm pkg get name) && (cd ~ && npx $PACKAGE_NAME --help)",
       "dependencies": [
         "wireit:pack:install"
       ]

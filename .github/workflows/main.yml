@@ -22,9 +22,10 @@ jobs:
           - 10.5.0
         command:
           - npm install -g $(npm pack)
-          - npm install -g $(npm pack) && (cd ~ && npx @google-labs/breadboard-cli --help)
-          - npm pack && npm install -g $(find . -name 'google-labs-breadboard-cli-*.tgz')
-          - npm pack && npm install -g $(find . -name 'google-labs-breadboard-cli-*.tgz') && (cd ~ && npx @google-labs/breadboard-cli --help)
+          - npm install -g $(npm pack) && (cd ~ && npx $PACKAGE_NAME --help)
+          - npm pack && npm install -g $(find . -name $PACKAGE_NAME-*.tgz)
+          - npm pack && npm install -g $(find . -name $CLEAN_PACKAGE_NAME-*.tgz)
+          - npm pack && npm install -g $(find . -name "$CLEAN_PACKAGE_NAME-*.tgz") && (cd ~ && npx $PACKAGE_NAME --help)
           - npm run npm:pack:install
           - npm run npm:test:pack
           - npm run wireit:pack:install
@@ -43,4 +44,7 @@ jobs:
       - run: npm install
       - run: npm --version
       - run: npm config set loglevel verbose
-      - run: exec ${{ matrix.command }}
+      - run: export PACKAGE_NAME=$(npm pkg get name)
+      - run: export CLEAN_PACKAGE_NAME=$(echo $PACKAGE_NAME | sed 's/@//;s/\//-/')
+      - run: set -u
+      - run: ${{ matrix.command }}
