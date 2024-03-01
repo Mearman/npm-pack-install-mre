@@ -50,10 +50,11 @@ jobs:
 
       - run: npm pkg set name=${{ matrix.package_name }}
 
-      - run: export PACKAGE_NAME=$(npm pkg get name | tr -d '\"')
-      - run: echo $PACKAGE_NAME
+      - run: |
+          export PACKAGE_NAME=$(npm pkg get name | tr -d '\"')
+          echo $PACKAGE_NAME
 
-      - run: export CLEAN_PACKAGE_NAME=$(echo $PACKAGE_NAME | sed 's/@//;s/\//-/')
-      - run: echo $CLEAN_PACKAGE_NAME
+          export CLEAN_PACKAGE_NAME=$(echo $PACKAGE_NAME | sed 's/@//;s/\//-/')
+          echo $CLEAN_PACKAGE_NAME
 
-      - run: ${{ matrix.command }}
+          exec ${{ matrix.command }}
