@@ -3,10 +3,10 @@
     "wireit": "^0.14.4"
   },
   "main": "index.js",
-  "name": "npm-pack-install-mre",
+  "name": "@google-labs/breadboard-cli",
   "scripts": {
     "npm:pack:install": "npm install -g $(npm pack)",
-    "npm:test:pack": "npm run npm:pack:install && (cd ~ && npx npm-pack-install-mre --help)",
+    "npm:test:pack": "npm run npm:pack:install && (cd ~ && npx @google-labs/breadboard-cli --help)",
     "wireit:pack:install": "wireit",
     "wireit:test:pack": "wireit"
   },
@@ -16,7 +16,7 @@
       "command": "npm install -g $(npm pack)"
     },
     "wireit:test:pack": {
-      "command": "(cd ~ && npx npm-pack-install-mre --help)",
+      "command": "(cd ~ && npx @google-labs/breadboard-cli --help)",
       "dependencies": [
         "wireit:pack:install"
       ]
