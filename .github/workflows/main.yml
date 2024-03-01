@@ -21,7 +21,13 @@ jobs:
           - 10.5.0
         command:
           - npm install -g $(npm pack)
-          - npm run pack:install
+          - npm install -g $(npm pack) && (cd ~ && npx npm-pack-install-mre --help)
+          - npm pack && npm install -g $(find . -name 'google-labs-breadboard-cli-*.tgz')
+          - npm pack && npm install -g $(find . -name 'google-labs-breadboard-cli-*.tgz') && (cd ~ && npx npm-pack-install-mre --help)
+          - npm run npm:pack:install
+          - npm run npm:test:pack
+          - npm run wireit:pack:install
+          - npm run wireit:test:pack
     runs-on: ubuntu-latest
 
     steps:
