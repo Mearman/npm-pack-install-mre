@@ -25,9 +25,9 @@ jobs:
           - 10.5.0
         command:
           - npm install -g $(npm pack)
-          - npm install -g $(npm pack) && (cd ~ && npx $PACKAGE_NAME -- --help)
+          - npm install -g $(npm pack) && (cd ~ && npx ${PACKAGE_NAME} -- --help)
           - npm pack && npm install -g $(find . -name $CLEAN_PACKAGE_NAME-*.tgz)
-          - npm pack && npm install -g $(find . -name $CLEAN_PACKAGE_NAME-*.tgz) && (cd ~ && npx $PACKAGE_NAME -- --help)
+          - npm pack && npm install -g $(find . -name $CLEAN_PACKAGE_NAME-*.tgz) && (cd ~ && npx ${PACKAGE_NAME} -- --help)
           - npm run npm:pack:install
           - npm run npm:test:pack
           - npm run wireit:pack:install
