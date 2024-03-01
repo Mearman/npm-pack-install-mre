@@ -40,6 +40,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - run: npm install -g npm@${{ matrix.npm }}
+      - run: npm install
       - run: npm --version
       - run: npm config set loglevel verbose
       - run: exec ${{ matrix.command }}
