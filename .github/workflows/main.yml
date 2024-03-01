@@ -9,6 +9,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        package_name:
+          - npm-pack-install-mre
+          - "@google-labs/breadboard-cli"
         node:
           - 20
         npm:
@@ -33,6 +36,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@main
+      - run: set -u
 
       - name: Setup Node.js ${{ matrix.node }}
         uses: actions/setup-node@main
@@ -43,7 +47,13 @@ jobs:
       - run: npm install
       - run: npm --version
       - run: npm config set loglevel verbose
+
+      - run: npm config set name ${{ matrix.package_name }}
+
       - run: export PACKAGE_NAME=$(npm pkg get name)
+      - run: echo $PACKAGE_NAME
+
       - run: export CLEAN_PACKAGE_NAME=$(echo $PACKAGE_NAME | sed 's/@//;s/\//-/')
-      - run: set -u
+      - run: echo $CLEAN_PACKAGE_NAME
+
       - run: ${{ matrix.command }}
