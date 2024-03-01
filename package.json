@@ -6,7 +6,7 @@
   "name": "npm-pack-install-mre",
   "scripts": {
     "npm:pack:install": "npm install -g $(npm pack)",
-    "npm:test:pack": "npm run npm:pack:install && (cd ~ && npx $PACKAGE_NAME --help)",
+    "npm:test:pack": "PACKAGE_NAME=$(npm pkg get name | tr -d '\"') && npm run npm:pack:install && (cd ~ && npx ${PACKAGE_NAME})",
     "wireit:pack:install": "wireit",
     "wireit:test:pack": "wireit"
   },
@@ -16,10 +16,11 @@
       "command": "npm install -g $(npm pack)"
     },
     "wireit:test:pack": {
-      "command": "(cd ~ && npx $PACKAGE_NAME --help)",
+      "command": "PACKAGE_NAME=$(npm pkg get name | tr -d '\"') && npm run npm:pack:install && (cd ~ && npx ${PACKAGE_NAME})",
       "dependencies": [
         "wireit:pack:install"
       ]
     }
-  }
+  },
+  "bin": "index.js"
 }
