@@ -34,4 +34,5 @@ jobs:
 
       - run: npm install -g npm@${{ matrix.npm }}
       - run: npm --version
+      - run: npm config set loglevel verbose
       - run: exec ${{ matrix.command }}
