@@ -6,7 +6,7 @@
   "name": "@google-labs/breadboard-cli",
   "scripts": {
     "npm:pack:install": "npm install -g $(npm pack)",
-    "npm:test:pack": "npm run npm:pack:install && (cd ~ && npx $PACKAGE_NAME --help))",
+    "npm:test:pack": "npm run npm:pack:install && (cd ~ && npx $PACKAGE_NAME --help)",
     "wireit:pack:install": "wireit",
     "wireit:test:pack": "wireit"
   },
